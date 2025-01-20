@@ -3,6 +3,8 @@ import os
 from enemy_1 import Enemy_1
 from club import Club
 from enemy3 import Enemy_3
+from archer_towers import Towers
+
 
 class Game:
     def __init__(self):
@@ -10,7 +12,7 @@ class Game:
         self.height = 750
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = [Club()]
-        self.towers = []
+        self.towers = [Towers(300, 300)]
         self.lives = 10
         self.money = 100
         self.bg = pygame.image.load(os.path.join('game_assets/sistem', 'bg.jpg'))
@@ -42,8 +44,13 @@ class Game:
     def draw(self):
         self.win.blit(self.bg, (0, 0))
 
+        """враги"""
         for en in self.enemies:
             en.draw(self.win)
+
+        """башни"""
+        for tw in self.towers:
+            tw.draw(self.win)
 
         pygame.display.update()
 
