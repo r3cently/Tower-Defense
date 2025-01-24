@@ -29,9 +29,9 @@ class Enemy:
 
     def draw(self, win):
         self.animation_count += 1
-        if self.animation_count >= len(self.images):
+        if self.animation_count >= len(self.images) * 5:
             self.animation_count = 0
-        self.image = self.images[self.animation_count]
+        self.image = self.images[self.animation_count // 5]
         win.blit(self.image, (self.x - self.image.get_width() / 2, self.y - self.image.get_height() / 2))
         self.move()
 

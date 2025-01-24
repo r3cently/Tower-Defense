@@ -12,7 +12,7 @@ class Game:
         self.height = 750
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = [Club()]
-        self.towers = [Towers(300, 300)]
+        self.towers = [Towers(533, 193)]
         self.lives = 10
         self.money = 100
         self.bg = pygame.image.load(os.path.join('game_assets/sistem', 'bg.jpg'))
