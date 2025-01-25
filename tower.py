@@ -10,6 +10,7 @@ class Tower():
         self.selected = False
         self.menu = None
         self.tower_images = []
+        self.damage = 1
 
     def draw(self, win):
         """отрисовка башни"""
@@ -31,11 +32,12 @@ class Tower():
     def upgrade(self):
         """улучшение башни на 1 уровень по определнной цене"""
         self.level += 1
+        self.damage += 1
 
     def get_upgrade_cost(self):
         """возвращает цену улучшения, если она равна нулю, то улучшить нельзя"""
         return self.sell_price[self.level - 1]
 
-    def move(self, x ,y):
+    def move(self, x, y):
         self.x = x
         self.y = y

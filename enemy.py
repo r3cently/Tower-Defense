@@ -26,6 +26,7 @@ class Enemy:
         self.images = []
         self.dis = 0
         self.flipped = False
+        self.max_health = 0
 
     def draw(self, win):
         self.animation_count += 1
@@ -33,7 +34,16 @@ class Enemy:
             self.animation_count = 0
         self.image = self.images[self.animation_count // 5]
         win.blit(self.image, (self.x - self.image.get_width() / 2, self.y - self.image.get_height() / 2))
+        self.draw_health_bar(win)
         self.move()
+
+    def draw_health_bar(self, win):
+        length = 50
+        move_by = round(length / self.max_health)
+        health_bar = move_by * self.health
+
+        pygame.draw.rect(win, (255, 0, 0), (self.x - 35, self.y - 40, length, 10), 0)
+        pygame.draw.rect(win, (0, 255, 0), (self.x - 35, self.y - 40, health_bar, 10), 0)
 
     def collide(self, X, Y):
         if X <= self.x + self.width and X >= self.x:
@@ -48,7 +58,7 @@ class Enemy:
         else:
             x2, y2 = self.path[self.path_pos + 1]
 
-        dirn = ((x2 - x1)*2, (y2 - y1)*2)
+        dirn = ((x2 - x1) * 2, (y2 - y1) * 2)
         length = math.sqrt((dirn[0]) ** 2 + (dirn[1]) ** 2)
         dirn = (dirn[0] / length, dirn[1] / length)
 
@@ -81,3 +91,4 @@ class Enemy:
         self.health -= 1
         if self.health <= 0:
             return True
+        return False
