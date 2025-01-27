@@ -9,7 +9,7 @@ class MainMenu:
         self.height = 700
         self.bg = pygame.image.load(os.path.join("game_assets/sistem" + "/bg.jpg"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
-        self.start_btn = pygame.image.load(os.path.join("game_assets/sistem" + "/button_play.jpg")).convert_alpha()
+        self.start_btn = pygame.image.load(os.path.join("game_assets/sistem" + "/button_play.png")).convert_alpha()
         self.logo = pygame.image.load(os.path.join("game_assets/sistem" + "/logo.png")).convert_alpha()
         self.win = win
         self.btn = (self.width/2 - self.start_btn.get_width()/2, 350, self.start_btn.get_width(), self.start_btn.get_height())

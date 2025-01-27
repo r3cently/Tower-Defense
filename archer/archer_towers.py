@@ -11,7 +11,7 @@ class Towers(Tower):
         self.tower_images = []
         self.archer_images = []
         self.archer_count = 0
-        self.range = 130
+        self.range = 2
         self.inRange = False
         self.right = True
         self.timer = time.time()

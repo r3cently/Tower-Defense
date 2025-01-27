@@ -15,7 +15,7 @@ class Enemy:
                      (949, 206), (834, 73), (747, 85),
                      (724, 112), (715, 134), (693, 213), (619, 290), (567, 303),
                      (510, 305), (444, 300), (255, 294), (162, 255),
-                     (108, 246), (78, 246), (58, 246), (27, 250), (15, 250)]
+                     (108, 246), (78, 245), (58, 246), (27, 250), (1, 250), (-100, 373)]
         self.path_pos = 0
         self.x = self.path[0][0]
         self.y = self.path[0][1]
@@ -35,7 +35,8 @@ class Enemy:
         self.image = self.images[self.animation_count // 5]
         win.blit(self.image, (self.x - self.image.get_width() / 2, self.y - self.image.get_height() / 2))
         self.draw_health_bar(win)
-        self.move()
+        return self.move()
+
 
     def draw_health_bar(self, win):
         length = 50
@@ -52,15 +53,19 @@ class Enemy:
         return False
 
     def move(self):
+        will_hit = False
         x1, y1 = self.path[self.path_pos]
         if self.path_pos + 1 >= len(self.path):
-            x2, y2 = (-10, 373)
+            x2, y2 = (-100, 373)
+            will_hit = True
+
         else:
             x2, y2 = self.path[self.path_pos + 1]
 
         dirn = ((x2 - x1) * 2, (y2 - y1) * 2)
         length = math.sqrt((dirn[0]) ** 2 + (dirn[1]) ** 2)
         dirn = (dirn[0] / length, dirn[1] / length)
+
 
         if dirn[0] < 0 and not self.flipped:
             self.flipped = True
@@ -71,7 +76,6 @@ class Enemy:
 
         self.x = move_x
         self.y = move_y
-
         if dirn[0] >= 0:
             if dirn[1] >= 0:
                 if self.x >= x2 and self.y >= y2:
@@ -86,6 +90,7 @@ class Enemy:
             else:
                 if self.x <= x2 and self.y <= y2:
                     self.path_pos += 1
+        return will_hit
 
     def hit(self):
         self.health -= 1
