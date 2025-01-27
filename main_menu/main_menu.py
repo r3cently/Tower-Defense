@@ -2,9 +2,6 @@ from PyFiles.game import Game
 import pygame
 import os
 
-start_btn = pygame.image.load(os.path.join("game_assets/sistem" + "/button_play.jpg"))
-logo = pygame.image.load(os.path.join("game_assets/sistem" + "/logo.png"))
-
 
 class MainMenu:
     def __init__(self, win):
@@ -12,8 +9,10 @@ class MainMenu:
         self.height = 700
         self.bg = pygame.image.load(os.path.join("game_assets/sistem" + "/bg.jpg"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
+        self.start_btn = pygame.image.load(os.path.join("game_assets/sistem" + "/button_play.jpg")).convert_alpha()
+        self.logo = pygame.image.load(os.path.join("game_assets/sistem" + "/logo.png")).convert_alpha()
         self.win = win
-        self.btn = (self.width/2 - start_btn.get_width()/2, 350, start_btn.get_width(), start_btn.get_height())
+        self.btn = (self.width/2 - self.start_btn.get_width()/2, 350, self.start_btn.get_width(), self.start_btn.get_height())
 
     def run(self):
         run = True
@@ -30,14 +29,14 @@ class MainMenu:
                         if self.btn[1] <= y <= self.btn[1] + self.btn[3]:
                             game = Game()
                             game.run()
-                            del game
+
             self.draw()
 
         pygame.quit()
 
     def draw(self):
         self.win.blit(self.bg, (0,0))
-        self.win.blit(logo, (self.width/2 - logo.get_width()/2, 0))
-        self.win.blit(start_btn, (self.btn[0], self.btn[1]))
+        self.win.blit(self.logo, (self.width/2 - self.logo.get_width()/2, 0))
+        self.win.blit(self.start_btn, (self.btn[0], self.btn[1]))
         pygame.display.update()
 

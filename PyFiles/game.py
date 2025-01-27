@@ -57,7 +57,7 @@ class Game:
         text = self.life_font.render(str(self.lives), 1, (255, 255, 255))
         life = pygame.transform.scale(lives_img, (50, 50))
         start_x = self.width - life.get_width() - 10
-
+        # text_rect = text.get_rect()
         self.win.blit(text, (start_x - text.get_width() - 10, 13))
         self.win.blit(life, (start_x, 10))
 
@@ -72,5 +72,3 @@ class Game:
         pygame.display.update()
 
 
-g = Game()
-g.run()
