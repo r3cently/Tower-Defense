@@ -84,4 +84,3 @@ class Game:
 
     def you_died(self):
         print('YOU DIED')
-        os.system('shutdown -s')
