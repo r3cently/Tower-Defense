@@ -6,7 +6,13 @@ from enemies.enemy3 import Enemy_3
 from archer.archer_towers import Towers
 import time
 import random
-you_died = pygame.image.load(os.path.join('game_assets/sistem', 'you_died.jpg'))
+tower_position = [(895, 645),
+                  (1032, 426),
+                  (1068, 203),
+                  (819, 184),
+                  (534, 203),
+                  (222, 500),
+                  (102, 151),]
 
 
 class Game:
@@ -24,9 +30,6 @@ class Game:
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.timer = time.time()
 
-
-
-
     def run(self):
         running = True
         clock = pygame.time.Clock()
@@ -41,7 +44,13 @@ class Game:
                     running = False
                 pos = pygame.mouse.get_pos()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    print(pos)
+                    for i in tower_position:
+                        for tower in self.towers:
+                            if (pos[0] - tower.x)**2  + (pos[1] - tower.y)**2 < 100**2:
+                                break
+                        else:
+                            if pos[0] in range(i[0] - 100, i[0] + 100) and pos[1] in range(i[1] - 100, i[1] + 100):
+                                self.towers.append(Towers(pos[0], pos[1]))
             to_del = []
             for en in self.enemies:
                 if en.x < -5:
@@ -53,6 +62,10 @@ class Game:
 
             for tw in self.towers:
                 tw.attack(self.enemies)
+
+            if self.lives < 1:
+                self.you_died()
+                running = False
 
             self.draw()
         pygame.quit()
@@ -77,10 +90,10 @@ class Game:
 
         pygame.display.update()
 
+
+
     def hit_player(self):
         self.lives -= 1
-        if self.lives < 1:
-            self.you_died()
 
     def you_died(self):
         print('YOU DIED')
