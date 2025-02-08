@@ -11,11 +11,11 @@ class Towers(Tower):
         self.tower_images = []
         self.archer_images = []
         self.archer_count = 0
-        self.range = 140
-        self.inRange = False
+        self.range = 200
+        self.inRange =False
         self.right = True
         self.timer = time.time()
-        self.damage = 0.5
+        self.damage = 1
         """добавление изображений башен"""
         for x in range(1, 2):
             self.tower_images.append(pygame.transform.scale(

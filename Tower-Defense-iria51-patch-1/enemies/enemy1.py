@@ -7,7 +7,7 @@ class Enemy_1(Enemy):
     def __init__(self):
         super().__init__()
         self.images = []
-        self.max_health = 4
+        self.max_health = 2
         self.health = self.max_health
 
         for x in range(8):

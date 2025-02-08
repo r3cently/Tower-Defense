@@ -93,7 +93,7 @@ class Enemy:
         return will_hit
 
     def hit(self):
-        self.health -= 0.5
+        self.health -= 1
         if self.health <= 0:
             return True
         return False
