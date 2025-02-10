@@ -1,5 +1,5 @@
 import pygame
-from main_menu.main_menu import MainMenu
+from PyFiles.game import MainMenu
 
 if __name__ == "__main__":
     pygame.init()
