@@ -8,19 +8,19 @@ import time
 class Towers(Tower):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.tower_images = []
+        # self.tower_images = []
         self.archer_images = []
         self.archer_count = 0
-        self.range = 2
-        self.inRange = False
+        self.range = 200
+        self.inRange =False
         self.right = True
         self.timer = time.time()
         self.damage = 1
         """добавление изображений башен"""
-        for x in range(1, 2):
-            self.tower_images.append(pygame.transform.scale(
-                pygame.image.load(os.path.join("Towers/Tower" + str(x) + ".png")),
-                (400, 400)))
+        # for x in range(1, 2):
+        #     self.tower_images.append(pygame.transform.scale(
+        #         pygame.image.load(os.path.join("Towers/Tower" + str(x) + ".png")),
+        #         (400, 400)))
         """добавление изображений лучников(нужно найти спрайты)"""
         for x in range(1, 11):
             self.archer_images.append(
@@ -63,13 +63,13 @@ class Towers(Tower):
             if dis < self.range:
                 self.inRange = True
                 enemy_closest.append(enemy)
-
         if len(enemy_closest) > 0:
             first_enemy = enemy_closest[0]
             if time.time() - self.timer >= 0.5:
                 self.timer = time.time()
-                if first_enemy.hit() == True:
+                if first_enemy.hit(self.damage) == True:
                     enemies.remove(first_enemy)
+
             if first_enemy.x < self.x and not (self.right):
                 self.right = True
                 for x, img in enumerate(self.archer_images):

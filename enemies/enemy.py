@@ -1,5 +1,6 @@
 import pygame
 import math
+from archer.archer_towers import Towers
 
 
 class Enemy:
@@ -92,8 +93,8 @@ class Enemy:
                     self.path_pos += 1
         return will_hit
 
-    def hit(self):
-        self.health -= 1
+    def hit(self, damage):
+        self.health -= damage
         if self.health <= 0:
             return True
         return False
