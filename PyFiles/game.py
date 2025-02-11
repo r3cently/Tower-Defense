@@ -7,12 +7,9 @@ from enemies.enemy1 import Enemy_1
 from enemies.enemy2 import Enemy_2
 from enemies.enemy3 import Enemy_3
 from archer.archer_towers import Towers
-from PyFiles.tower import Tower
-from menu.menu import Menu
 from menu.menu import PlayPauseButton
 import time
 import random
-
 
 pygame.init()
 waves = [
@@ -109,6 +106,7 @@ pause_btn = pygame.transform.scale(pygame.image.load(os.path.join("game_assets/s
 
 class Game:
     def __init__(self):
+        self.run_mobs = 0
         self.width = 1350
         self.height = 750
         self.win = pygame.display.set_mode((self.width, self.height))
@@ -148,6 +146,9 @@ class Game:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    with open('run_mobs', 'w') as f:
+                        f.write(self.wave, self.run_mobs)
+                        f.close()
                     running = False
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
@@ -215,8 +216,10 @@ class Game:
                 if self.current_wave[x] != 0:
                     self.enemies.append(wave_enemies[x])
                     self.current_wave[x] = self.current_wave[x] - 1
+                    self.run_mobs += 1
                     break
             self.text = 'Continue'
+
 
     def draw(self):
         self.win.blit(self.bg, (0, 0))
